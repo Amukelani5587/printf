@@ -1,204 +1,92 @@
-Tasks
-0. I'm not going anywhere. You can print that wherever you want to. I'm here and I'm a Spur for life
-mandatory
+# Printf.
+```` c
+int printf ( const char * format, ... );
+````
+This is the first group project that we have at Holberton School, which consists of replicating the **[printf (3)](http://man7.org/linux/man-pages/man3/printf.3.html)** function of language c, calling it this way **_printf.**
+
+This function is part of the standard library **<cstdio>** and to use it we must specify the header file **<stdio.h>**.
+
+Writes the C string pointed by format to the standard output **(stdout)**. If format includes format specifiers (subsequences beginning with **%**), the additional arguments following format are formatted and inserted in the resulting string replacing their respective specifiers.
+### Parameters
+ > **format** -> C string that contains the text to be written to stdout.
+ 
+Where the specifier character at the end is the most significant component, since it defines the type and the interpretation of its corresponding argument:
+ Specifier | Output | Example
+------------ | ------------- |-----------
+ c | Character | A
+ s | String of characters | Holberton
+ % | A % followed by another % character will write a single % to the stream| %
+  i and d | Signed decimal integer | 98 
+ b | Unsigned binary | 10101
+ u | Unsigned decimal integer | 98
+ o | Unsigned octal | 5523
+ x | Unsigned hexadecimal integer (lowercase) | 36264eb
+ X | Unsigned hexadecimal integer (uppercase) | 36264EB
+ r | Reversed string | gnirts |
+ R | Rot13 string | cevags
+##### Return Value.
+On **success**, the **total number** of characters written is returned.
+If a writing error occurs, the error indicator (ferror) is set and a negative number is returned.
+ 
+## The tasks.
+-[x] **I'm not going anywhere. You can print that wherever you want to. I'm here and I'm a Spur for life.** 
 Write a function that produces output according to a format.
 
-Prototype: int _printf(const char *format, ...);
-Returns: the number of characters printed (excluding the null byte used to end output to strings)
-write output to stdout, the standard output stream
-format is a character string. The format string is composed of zero or more directives. See man 3 printf for more detail. You need to handle the following conversion specifiers:
-c
-s
-%
-You don’t have to reproduce the buffer handling of the C library printf function
-You don’t have to handle the flag characters
-You don’t have to handle field width
-You don’t have to handle precision
-You don’t have to handle the length modifiers
-Repo:
+- Prototype:``int _printf(const char *format, ...);``
+- Returns: the number of characters printed (excluding the null byte used to end output to strings)
+- write output to stdout, the standard output stream
+- format is a character string. The format string is composed of zero or more directives. See man 3 printf for more detail. You need to handle the following conversion specifiers:
+-- ``c``
+-- ``s``
+--  ``%``
 
-GitHub repository: printf
-   
-1. Education is when you read the fine print. Experience is what you get if you don't
-mandatory
+ -[x] **Education is when you read the fine print. Experience is what you get if you don't**
 Handle the following conversion specifiers:
+-- ``d``
+--``i``
+### [Man_3_printf.](https://photos.app.goo.gl/pY1W7jWLFGHLPa3S6)
+## Functions we use.
 
-d
-i
-You don’t have to handle the flag characters
-You don’t have to handle field width
-You don’t have to handle precision
-You don’t have to handle the length modifiers
-Repo:
+````c
+int _putchar(char c); /*writes the character c to stdout */
+int _printf(const char *format, ...);/* function that produces output according to a format.*/
+int print_char(va_list c);/*writes the character c to stdout */
+int print_string(va_list s);/*writes the character c to stdout */
+int print_int(va_list i);/*function that prints an integer */
+int print_dec(va_list d);/* function that prints an decimal*/
+````
+## [Flowchart.](https://photos.app.goo.gl/5SQMnxrmd7nkLr3a6)
+## How to use.
+### Complilation
+All of the ``.c`` files along with a main.c file are to be compiled with ``gcc 4.8.4`` on Ubuntu 14.04 LTS with the flags ``-Wall Werror`` ``-Westra`` and ``-pedantic.``
 
-GitHub repository: printf
-   
-2. With a face like mine, I do better in print
-#advanced
-Handle the following custom conversion specifiers:
-
-b: the unsigned int argument is converted to binary
-alex@ubuntu:~/c/printf$ cat main.c
-#include "main.h"
-
+The files will be compiled this way:
+- ``gcc -Wall -Werror -Wextra -pedantic *.c``
+#### Use.
+In the ``main.c`` file, use the ``_printf`` function like so:
+```c
+#include "holberton.h"
 /**
- * main - Entry point
- *
- * Return: Always 0
+ * main - main function of program
+ * Return: always 0
  */
 int main(void)
 {
-    _printf("%b\n", 98);
-    return (0);
+	int num;
+	char *string;
+	
+	num = 98;
+	string = "Hello, Holberon!"
+	_printf("%s is %i.\n", string, num);
+	return (0);
 }
-alex@ubuntu:~/c/printf$ gcc -Wall -Wextra -Werror -pedantic -std=gnu89 main.c
-alex@ubuntu:~/c/printf$ ./a.out
-1100010
-alex@ubuntu:~/c/printf$
-Repo:
-
-GitHub repository: printf
-  
-3. What one has not experienced, one will never understand in print
-#advanced
-Handle the following conversion specifiers:
-
-u
-o
-x
-X
-You don’t have to handle the flag characters
-You don’t have to handle field width
-You don’t have to handle precision
-You don’t have to handle the length modifiers
-Repo:
-
-GitHub repository: printf
-   
-4. Nothing in fine print is ever good news
-#advanced
-Use a local buffer of 1024 chars in order to call write as little as possible.
-
-Repo:
-
-GitHub repository: printf
-   
-5. My weakness is wearing too much leopard print
-#advanced
-Handle the following custom conversion specifier:
-
-S : prints the string.
-Non printable characters (0 < ASCII value < 32 or >= 127) are printed this way: \x, followed by the ASCII code value in hexadecimal (upper case - always 2 characters)
-alex@ubuntu:~/c/printf$ cat main.c
-#include "main.h"
-
-/**
- * main - Entry point
- *
- * Return: Always 0
- */
-int main(void)
-{
-    _printf("%S\n", "Best\nSchool");
-    return (0);
-}
-alex@ubuntu:~/c/printf$ gcc -Wall -Wextra -Werror -pedantic -std=gnu89 main.c
-alex@ubuntu:~/c/printf$ ./a.out
-Best\x0ASchool
-alex@ubuntu:~/c/printf$
-Repo:
-
-GitHub repository: printf
-  
-6. How is the world ruled and led to war? Diplomats lie to journalists and believe these lies when they see them in print
-#advanced
-Handle the following conversion specifier: p.
-
-You don’t have to handle the flag characters
-You don’t have to handle field width
-You don’t have to handle precision
-You don’t have to handle the length modifiers
-Repo:
-
-GitHub repository: printf
-   
-7. The big print gives and the small print takes away
-#advanced
-Handle the following flag characters for non-custom conversion specifiers:
-
-+
-space
-#
-Repo:
-
-GitHub repository: printf
-   
-8. Sarcasm is lost in print
-#advanced
-Handle the following length modifiers for non-custom conversion specifiers:
-
-l
-h
-Conversion specifiers to handle: d, i, u, o, x, X
-
-Repo:
-
-GitHub repository: printf
-   
-9. Print some money and give it to us for the rain forests
-#advanced
-Handle the field width for non-custom conversion specifiers.
-
-Repo:
-
-GitHub repository: printf
-   
-10. The negative is the equivalent of the composer's score, and the print the performance
-#advanced
-Handle the precision for non-custom conversion specifiers.
-
-Repo:
-
-GitHub repository: printf
-   
-11. It's depressing when you're still around and your albums are out of print
-#advanced
-Handle the 0 flag character for non-custom conversion specifiers.
-
-Repo:
-
-GitHub repository: printf
-   
-12. Every time that I wanted to give up, if I saw an interesting textile, print what ever, suddenly I would see a collection
-#advanced
-Handle the - flag character for non-custom conversion specifiers.
-
-Repo:
-
-GitHub repository: printf
-   
-13. Print is the sharpest and the strongest weapon of our party
-#advanced
-Handle the following custom conversion specifier:
-
-r : prints the reversed string
-Repo:
-
-GitHub repository: printf
-   
-14. The flood of print has turned reading into a process of gulping rather than savoring
-#advanced
-Handle the following custom conversion specifier:
-
-R: prints the rot13'ed string
-Repo:
-
-GitHub repository: printf
-   
-15. *
-#advanced
-All the above options work well together.
-
-Repo:
-
-GitHub repository: printf
+```
+```{bash}
+linux>$  gcc -Wall -Werror -Wextra -pedantic *.c -o print_program
+linux>$  ./print_program
+Hello, Holberton is 98.
+linux>$
+```
+## Contributors
+- [Miguel Palacios](https://github.com/MiguelP4lacios)
+- [Daniela Lopera](https://github.com/danielaloperahernandez)
