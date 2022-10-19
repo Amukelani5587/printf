@@ -88,5 +88,5 @@ Hello, Holberton is 98.
 linux>$
 ```
 ## Contributors
-- [Miguel Palacios](https://github.com/MiguelP4lacios)
-- [Daniela Lopera](https://github.com/danielaloperahernandez)
+- [Amukelani Sibuyi](https://github.com/Amukelani5587)
+- [Michael Chinemerem Akouwa](https://github.com/EmceeA)
